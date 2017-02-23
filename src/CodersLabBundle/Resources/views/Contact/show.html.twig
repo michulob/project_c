@@ -1,0 +1,43 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}CodersLabBundle:Contact:show{% endblock %}
+
+{% block body %}
+<a href="{{ path('coderslab_contact_delete', { 'id':contact.id }) }}">Usuń kontakt</a><br />
+<a href="{{ path('coderslab_contact_modify', { 'id':contact.id }) }}">Edytuj kontakt</a><br />
+<a href="{{ path('coderslab_contact_showall' )}}">Powrot do listy kontaktow </a>
+<h1>Podgląd użytkownika</h1>
+    {{ contact.name }}<br />
+    {{ contact.surname }}<br />
+    "{{ contact.description }}"<br />
+    <hr />
+    
+    <h1>Adres/y :</h1><br />
+    <hr />
+    {% for adr in contact.address %}
+        Miasto :{{ adr.city }}<br />
+        Ulica :{{ adr.street }}<br />
+        Numer domu :{{ adr.building }}<br />
+        Numer mieszkania :{{ adr.flat }}<br />
+        <a href="{{ path('coderslab_contact_deleteaddress', { 'id':adr.id }) }}">Usuń</a><br />
+        <hr />
+    {% endfor %}
+    
+        <h1>Numery telefonu :</h1><br />
+    <hr />
+    {% for num in contact.phone %}
+        Numer :{{ num.number }}<br />
+        Typ :{{ num.type }}<br />
+        <a href="{{ path('coderslab_contact_deletephone', { 'id':num.id }) }}">Usuń</a><br />
+        <hr />
+    {% endfor %}
+    
+        <h1>Email :</h1><br />
+    <hr />
+    {% for mail in contact.email %}
+        Email :{{ mail.email }}<br />
+        Typ :{{ mail.type }}<br />
+        <a href="{{ path('coderslab_contact_deleteemail', { 'id':mail.id }) }}">Usuń</a><br />
+        <hr />
+    {% endfor %}
+{% endblock %}

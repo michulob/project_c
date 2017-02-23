@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}CodersLabBundle:Contact:modify{% endblock %}
+
+{% block body %}
+    <a href="{{ path('coderslab_contact_showall' )}}">Powrot do listy kontaktow</a>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Edit">
+    {{ form_end(form) }}<br />
+    <hr />
+    Dodaj nowy adres : <br />
+    {{ form_start(formAddress) }}
+    {{ form_widget(formAddress) }}
+    <input type="submit" value="Add">
+    {{ form_end(formAddress) }}
+    <hr />
+        Dodaj nowy numer telefonu : <br />
+    {{ form_start(formPhone) }}
+    {{ form_widget(formPhone) }}
+    <input type="submit" value="Add">
+    {{ form_end(formPhone) }}
+    <hr />
+        Dodaj nowy email : <br />
+    {{ form_start(formEmail) }}
+    {{ form_widget(formEmail) }}
+    <input type="submit" value="Add">
+    {{ form_end(formEmail) }}
+{% endblock %}

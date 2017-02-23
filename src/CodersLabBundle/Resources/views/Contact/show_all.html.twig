@@ -1,0 +1,18 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}CodersLabBundle:Contact:showAll{% endblock %}
+
+{% block body %}
+<h1>Twoje kontakty</h1>
+<a href="{{ path('coderslab_contact_new') }}">Dodaj nowy kontakt</a><br />
+<hr />
+{% for contact in contacts %}
+    {{ contact.name }}<br />
+    {{ contact.surname }}<br />
+    "{{ contact.description }}"<br />
+    <a href="{{ path('coderslab_contact_delete', { 'id':contact.id }) }}">Usuń</a><br />
+    <a href="{{ path('coderslab_contact_modify', { 'id':contact.id }) }}">Edytuj</a><br />
+    <a href="{{ path('coderslab_contact_show', { 'id':contact.id }) }}">Podgląd</a>
+    <hr />
+{% endfor %}
+{% endblock %}

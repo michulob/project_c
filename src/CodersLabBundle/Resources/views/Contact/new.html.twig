@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}CodersLabBundle:Contact:new{% endblock %}
+
+{% block body %}
+    <h1>Nowy kontakt</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create">
+    {{ form_end(form) }}
+    <a href="{{ path('coderslab_contact_showall' )}}">Powrot do listy kontaktow</a>
+{% endblock %}
