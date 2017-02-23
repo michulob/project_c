@@ -17,6 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class ContactController extends Controller
 {
+    private function checkAccess($contact){
+        if ($contact->getUser() != $this->getUser()){
+            throw new \Exception ("Acces Denied");
+        }
+    }
+    
 //1. Tworzenie formularza do stworzenia nowej
 //encji (GET na adres /new).
      /**
@@ -33,7 +39,7 @@ class ContactController extends Controller
         ));
     }
     
-    //2. Tworzenie nowej encji
+//2. Tworzenie nowej encji
 //(POST na adres /new).
     /**
      * @Route("/new")
@@ -71,6 +77,7 @@ class ContactController extends Controller
         // znalezienie odpowiedniego uzytkownika
         $contact = $em->getRepository('CodersLabBundle:Contact')
                       ->find($id);
+        $this->checkAccess($contact);
         // zapisanie formularza do zmiennej form
         $form = $this->createForm(ContactType::class, $contact);
         
@@ -133,6 +140,7 @@ class ContactController extends Controller
      */
     public function deleteAction(Contact $contact)
     {   
+        $this->checkAccess($contact);
         $em = $this->getDoctrine()->getManager();
         $em->remove($contact);
         $em->flush();
@@ -145,7 +153,7 @@ class ContactController extends Controller
      */
     public function showAction(Contact $contact)
     {   
-        
+        $this->checkAccess($contact);
         return $this->render('CodersLabBundle:Contact:show.html.twig', array(
                 'contact' => $contact
         ));
@@ -273,6 +281,7 @@ class ContactController extends Controller
                       ->find($id);
         $contact = $em->getRepository('CodersLabBundle:Contact')
                       ->find($address->getContact());
+        $this->checkAccess($contact);
         $em->remove($address);
         $em->flush();
         
@@ -296,6 +305,7 @@ class ContactController extends Controller
                       ->find($id);
         $contact = $em->getRepository('CodersLabBundle:Contact')
                       ->find($phone->getContact());
+        $this->checkAccess($contact);
         $em->remove($phone);
         $em->flush();
         
@@ -314,6 +324,7 @@ class ContactController extends Controller
                       ->find($id);
         $contact = $em->getRepository('CodersLabBundle:Contact')
                       ->find($email->getContact());
+        $this->checkAccess($contact);
         $em->remove($email);
         $em->flush();
         
