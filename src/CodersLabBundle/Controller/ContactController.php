@@ -48,6 +48,7 @@ class ContactController extends Controller
         if ($form->isSubmitted() && $form->isValid())
         {
             $contact = $form->getData();
+            $contact->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
@@ -154,12 +155,16 @@ class ContactController extends Controller
      * @Route("/showAll")
      */
     public function showAllAction()
-    {
+    {   
+        $user = $this->getUser();
+//      return $this->render('CodersLabBundle:Contact:debug.html.twig', array(
+//            'user' => $user
+//        ));
         $contacts = $this->getDoctrine()
                          ->getRepository('CodersLabBundle:Contact')
-                         ->findAll();
+                         ->findByUser($user->getId());
         return $this->render('CodersLabBundle:Contact:show_all.html.twig', array(
-            'contacts' => $contacts 
+            'contacts' => $contacts
         ));
     }
     
@@ -194,7 +199,7 @@ class ContactController extends Controller
         }
     }
     
-    //    2. Dodaj do widoku formularz (przypisany do
+//    2. Dodaj do widoku formularz (przypisany do
 //numeru telefonu), który będzie odsyłał do strony POST
 ///{id}/addPhone.
     /**

@@ -97,4 +97,27 @@ class Email
     {
         return $this->type;
     }
+
+    /**
+     * Set contact
+     *
+     * @param \CodersLabBundle\Entity\Contact $contact
+     * @return Email
+     */
+    public function setContact(\CodersLabBundle\Entity\Contact $contact = null)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return \CodersLabBundle\Entity\Contact 
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
 }

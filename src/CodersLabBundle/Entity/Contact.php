@@ -59,6 +59,11 @@ class Contact
     private $email;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="contacts")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+    /**
      * Get id
      *
      * @return integer 
@@ -243,5 +248,28 @@ class Contact
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CodersLabBundle\Entity\User $user
+     * @return Contact
+     */
+    public function setUser(\CodersLabBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CodersLabBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
